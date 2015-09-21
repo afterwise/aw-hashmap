@@ -95,11 +95,11 @@ static void hashmap_init(hashmap_u32_t *key, size_t n) {
 static ssize_t hashmap_add(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) _hashmap_unused;
 static ssize_t hashmap_add(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	hashmap_u32_t h = key % n, i = h, k = 1, a = 1;
-	int x;
+	hashmap_s32_t x;
 	while (a < n) {
 		if (keys[i] == (hashmap_u32_t) hashmap_asr31(keys[i]) || keys[i] == key) {
 			keys[i] = key;
-			return (int) i;
+			return i;
 		}
 		i = h + a * k;
 		x = hashmap_sel_u32(i, i, -i) % n * hashmap_sel_s32(i, 1, -1);
@@ -115,7 +115,7 @@ static ssize_t hashmap_add(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 static ssize_t hashmap_find(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) _hashmap_unused;
 static ssize_t hashmap_find(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	hashmap_u32_t h = key % n, i = h, k = 1, a = 1;
-	int x;
+	hashmap_s32_t x;
 	while (a < n) {
 		if (_hashmap_unlikely(keys[i] == 0))
 			break;
@@ -131,9 +131,9 @@ static ssize_t hashmap_find(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	return -1;
 }
 
-static int hashmap_remove(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) _hashmap_unused;
-static int hashmap_remove(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
-	int i;
+static ssize_t hashmap_remove(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) _hashmap_unused;
+static ssize_t hashmap_remove(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
+	ssize_t i;
 	if ((i = hashmap_find(keys, n, key)) >= 0) {
 		keys[i] = ~0u;
 		return i;
