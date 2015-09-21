@@ -1,25 +1,24 @@
 
-export CFLAGS += -Wall -Wextra
+export CFLAGS += -Wall -Wextra -Itest/aw-time
 
-test: test.o ../libaw-hashmap.a
+test: test.o aw-time/libaw-time.a
 	$(CC) $(LDFLAGS) -o $@ $^
 
-%.o: %.c aw-bytes/aw-types.h
-	$(CC) $(CFLAGS) -I.. -Iaw-utf8 -c $< -o $@
+%.o: %.c aw-time/aw-time.h
+	$(CC) $(CFLAGS) -I.. -Iaw-time -c $< -o $@
 
-../libaw-hashmap.a: CFLAGS += -Itest/aw-bytes
-
-../libaw-hashmap.a: aw-bytes/aw-types.h
+../libaw-hashmap.a:
 	$(MAKE) -C..
 
-aw-bytes/aw-types.h:
-	git clone ../../aw-bytes && \
+aw-time/libaw-time.a:
+	$(MAKE) -Caw-time
+
+aw-time/aw-time.h:
+	git clone git@github.com:afterwise/aw-time.git && \
 	touch -c $@
-#	git clone git@github.com:afterwise/aw-fs.git && \
-#	touch -c $@
 
 .PHONY: clean
 clean:
 	rm -f test test.o
-	rm -rf aw-bytes
+	rm -rf aw-time
 
