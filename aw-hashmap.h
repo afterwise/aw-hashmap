@@ -62,17 +62,17 @@ typedef unsigned long long hashmap_u64_t;
 typedef float hashmap_f32_t;
 typedef double hashmap_f64_t;
 
-_hashmap_alwaysinline hashmap_u32_t hashmap_lsr31(hashmap_u32_t a) { return a >> 31; }
-_hashmap_alwaysinline hashmap_s32_t hashmap_asr31(hashmap_s32_t a) { return a >> 31; }
+static _hashmap_alwaysinline hashmap_u32_t hashmap_lsr31(hashmap_u32_t a) { return a >> 31; }
+static _hashmap_alwaysinline hashmap_s32_t hashmap_asr31(hashmap_s32_t a) { return a >> 31; }
 
-_hashmap_alwaysinline hashmap_s32_t hashmap_abs_s32(hashmap_s32_t a) {
+static _hashmap_alwaysinline hashmap_s32_t hashmap_abs_s32(hashmap_s32_t a) {
 	return (a ^ hashmap_asr31(a)) - hashmap_asr31(a);
 }
 
-_hashmap_alwaysinline hashmap_s32_t hashmap_sel_s32(hashmap_s32_t x, hashmap_s32_t a, hashmap_s32_t b) {
+static _hashmap_alwaysinline hashmap_s32_t hashmap_sel_s32(hashmap_s32_t x, hashmap_s32_t a, hashmap_s32_t b) {
 	return a + ((b - a) & hashmap_asr31(x));
 }
-_hashmap_alwaysinline hashmap_u32_t hashmap_sel_u32(hashmap_u32_t x, hashmap_u32_t a, hashmap_u32_t b) {
+static _hashmap_alwaysinline hashmap_u32_t hashmap_sel_u32(hashmap_u32_t x, hashmap_u32_t a, hashmap_u32_t b) {
 	return a + ((b - a) & hashmap_asr31(x));
 }
 
