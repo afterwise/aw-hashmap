@@ -14,7 +14,7 @@ aw-time/libaw-time.a:
 	$(MAKE) -Caw-time
 
 aw-time/aw-time.h:
-	git clone git@github.com:afterwise/aw-time.git && \
+	git clone https://github.com/afterwise/aw-time.git && \
 	touch -c $@
 
 .PHONY: clean
