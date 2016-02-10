@@ -1,6 +1,6 @@
 
 /*
-   Copyright (c) 2014-2015 Malte Hildingsson, malte (at) afterwi.se
+   Copyright (c) 2014-2016 Malte Hildingsson, malte (at) afterwi.se
 
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ extern "C" {
 
 #if __GNUC__
 # define _hashmap_alwaysinline inline __attribute__((always_inline))
-# define _hashmap_unused __attribute__((__unused__))
+# define _hashmap_unused __attribute__((unused))
 #elif _MSC_VER
 # define _hashmap_alwaysinline __forceinline
 # define _hashmap_unused
@@ -87,12 +87,12 @@ static _hashmap_alwaysinline hashmap_u32_t hashmap_sel_u32(hashmap_u32_t x, hash
 	probing.
 */
 
-static void hashmap_init(hashmap_u32_t *key, size_t n) _hashmap_unused;
+_hashmap_unused
 static void hashmap_init(hashmap_u32_t *key, size_t n) {
 	memset(key, 0, sizeof (hashmap_u32_t) * n);
 }
 
-static ssize_t hashmap_add(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) _hashmap_unused;
+_hashmap_unused
 static ssize_t hashmap_add(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	hashmap_u32_t h = key % n, i = h, k = 1, a = 1;
 	hashmap_s32_t x;
@@ -112,7 +112,7 @@ static ssize_t hashmap_add(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	return -1;
 }
 
-static ssize_t hashmap_find(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) _hashmap_unused;
+_hashmap_unused
 static ssize_t hashmap_find(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	hashmap_u32_t h = key % n, i = h, k = 1, a = 1;
 	hashmap_s32_t x;
@@ -131,7 +131,7 @@ static ssize_t hashmap_find(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	return -1;
 }
 
-static ssize_t hashmap_remove(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) _hashmap_unused;
+_hashmap_unused
 static ssize_t hashmap_remove(hashmap_u32_t *keys, size_t n, hashmap_u32_t key) {
 	ssize_t i;
 	if ((i = hashmap_find(keys, n, key)) >= 0) {
