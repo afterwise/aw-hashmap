@@ -1,5 +1,5 @@
 
-export CFLAGS += -Wall -Wextra -Itest/aw-time
+export CFLAGS += -std=c99 -Wall -Wextra -Itest/aw-time
 
 test: test.o aw-time/libaw-time.a
 	$(CC) $(LDFLAGS) -o $@ $^
