@@ -28,6 +28,7 @@
 extern "C" {
 #endif
 
+#include <sys/types.h>
 #include <string.h>
 
 #if __GNUC__
