@@ -1,5 +1,5 @@
 
-export CFLAGS += -std=c99 -D_DEFAULT_SOURCE -D_POSIX_C_SOURCE=200809L -Wall -Wextra -Itest/aw-time
+export CFLAGS += -std=c99 -Wall -Wextra -Itest/aw-time
 
 ifeq ($(shell uname -s),Linux)
 export LDLIBS += -lrt
