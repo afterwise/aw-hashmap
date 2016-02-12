@@ -68,7 +68,7 @@ add_again:
 	k = 0x1337;
 	for (i = 0; i < fp; ++i) {
 fp_again:
-		k = (k + 0x5125 ^ 0x3851) & 0xffff;
+		k = ((k + 0x5125) ^ 0x3851) & 0xffff;
 
 		for (j = 0; j < n; ++j)
 			if (k == knownkeys[j])
